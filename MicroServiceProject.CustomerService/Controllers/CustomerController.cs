@@ -18,7 +18,7 @@ namespace MicroServiceProject.CustomerService.Controllers
         public async Task<IActionResult> Create(CreateCustomerCommand command)
         {
             var customerId = await _mediator.Send(command);
-            return CreatedAtAction(nameof(Create), new { id = customerId }, null);
+            return CreatedAtAction(nameof(Create), new { id = customerId }, null); // json döndrülmeli
         }
 
         [HttpGet]
@@ -30,7 +30,7 @@ namespace MicroServiceProject.CustomerService.Controllers
         [HttpGet("test-exception")]
         public IActionResult TestException()
         {
-            throw new Exception("This is a test exception for logging.");
+            throw new Exception("This is a test exception for logging."); // json döndrülmeli
         }
     }
 }

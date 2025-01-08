@@ -30,12 +30,12 @@ namespace MicroServiceProject.OrderStatusService.Controllers
                 return NotFound("Order not found.");
             }
 
-            return Ok(); // Güncelleme başarılı
+            return Ok(); // Güncelleme başarılı  json döndrülmeli
         }
         [HttpGet("test-exception")]
         public IActionResult TestException()
         {
-            throw new Exception("This is a test exception for logging.");
+            throw new Exception("This is a test exception for logging."); //  json döndrülmeli
         }
     }
 }

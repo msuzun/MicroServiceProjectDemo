@@ -22,7 +22,7 @@ namespace MicroServiceProject.OrderService.Controllers
         public async Task<IActionResult> Create(CreateOrderCommand command)
         {
             var orderId = await _mediator.Send(command);
-            return CreatedAtAction(nameof(Create), new { id = orderId }, null);
+            return CreatedAtAction(nameof(Create), new { id = orderId }, null); // json döndrülmeli
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -40,7 +40,7 @@ namespace MicroServiceProject.OrderService.Controllers
                 return NotFound("Order not found.");
             }
 
-            return Ok(order);
+            return Ok(order); // json döndrülmeli
         }
         [HttpGet("product/{productId}/exists")]
         public async Task<IActionResult> CheckProductInOrders(int productId)
@@ -51,7 +51,7 @@ namespace MicroServiceProject.OrderService.Controllers
         [HttpGet("test-exception")]
         public IActionResult TestException()
         {
-            throw new Exception("This is a test exception for logging.");
+            throw new Exception("This is a test exception for logging."); // json döndrülmeli
         }
     }
 }

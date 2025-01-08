@@ -40,7 +40,7 @@ public class ProductController : ControllerBase
             return NotFound("Böyle bir ürün bulunmamaktadır.");
         }
 
-        return Ok(); // Başarılı güncelleme
+        return Ok(); // Başarılı güncelleme json döndrülmeli
     }
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
@@ -56,7 +56,7 @@ public class ProductController : ControllerBase
             return NotFound("Product not found.");
         }
 
-        return Ok(); // Başarılı silme
+        return Ok(); // Başarılı silme  json döndrülmeli
     }
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -78,7 +78,7 @@ public class ProductController : ControllerBase
             return NotFound("Product not found.");
         }
 
-        return Ok(product);
+        return Ok(product); //json döndrülmeli
     }
     [HttpGet("get-id-by-name/{name}")]
     public async Task<IActionResult> GetProductIdByName(string name)
@@ -101,11 +101,11 @@ public class ProductController : ControllerBase
             return NotFound("Product not found.");
         }
 
-        return Ok(product.Stock); // Ürünün mevcut stok miktarını döner
+        return Ok(product.Stock); // Ürünün mevcut stok miktarını döner  json döndrülmeli
     }
     [HttpGet("test-exception")]
     public IActionResult TestException()
     {
-        throw new Exception("This is a test exception.");
+        throw new Exception("This is a test exception."); //json döndrülmeli
     }
 }
