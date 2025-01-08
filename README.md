@@ -246,6 +246,128 @@ dotnet test
 
 ---
 
+
+# MicroServiceProject.ProductService ve MicroServiceProject.OrderService için Test Dokümantasyonu
+
+Bu doküman, **MicroServiceProject.ProductService** ve **MicroServiceProject.OrderService** için yazılan testleri detaylandırır. Test yapısı, test türleri ve testlerin nasıl çalıştırılacağı hakkında bilgi içerir.
+
+---
+
+## **1. ProductService Test Dokümantasyonu**
+
+### **Test Kategorileri**
+
+1. **Birim Testleri (Unit Tests)**:
+   - İş mantığının doğru çalıştığından emin olmak için her bir command ve query handler için yazılan testler.
+
+2. **Entegrasyon Testleri (Integration Tests)**:
+   - ProductService'in bağımlılıkları (örneğin, veritabanı) ile etkileşimini test eder.
+
+### **Birim Testleri**
+
+#### **Commands**
+
+- `CreateProductCommandHandlerTests`
+  - `Handle_ValidCommand_ShouldCreateProduct`
+
+- `UpdateProductCommandHandlerTests`
+  - `Handle_ValidCommand_ShouldUpdateProduct`
+
+- `DeleteProductCommandHandlerTests`
+  - `Handle_ValidCommand_ShouldDeleteProduct`
+
+#### **Queries**
+
+- `GetProductsQueryHandlerTests`
+  - `Handle_ShouldReturnProductsList`
+
+- `GetProductByIdQueryHandlerTests`
+  - `Handle_ValidId_ShouldReturnProduct`
+
+### **Entegrasyon Testleri**
+
+- `ProductServiceIntegrationTests`
+  - `Product` varlığı üzerindeki CRUD işlemleri için veritabanı entegrasyonunu test eder.
+
+### **ProductService Testlerinin Çalıştırılması**
+
+Tüm ProductService testlerini çalıştırmak için:
+```bash
+cd MicroServiceProject.ProductService.Tests
+dotnet test
+```
+
+Belirli bir test sınıfını çalıştırmak için:
+```bash
+dotnet test --filter FullyQualifiedName~MicroServiceProject.ProductService.Tests.Commands.CreateProductCommandHandlerTests
+```
+
+---
+
+## **2. OrderService Test Dokümantasyonu**
+
+### **Test Kategorileri**
+
+1. **Birim Testleri (Unit Tests)**:
+   - Her bir command ve query handler için yazılan testler.
+
+2. **Entegrasyon Testleri (Integration Tests)**:
+   - Sipariş oluşturma sırasında stok doğrulama için OrderService ile ProductService'in etkileşimini test eder.
+
+### **Birim Testleri**
+
+#### **Commands**
+
+- `CreateOrderCommandHandlerTests`
+  - `Handle_ValidCommand_ShouldCreateOrder`
+
+- `UpdateOrderCommandHandlerTests`
+  - `Handle_ValidCommand_ShouldUpdateOrderStatus`
+
+#### **Queries**
+
+- `GetOrdersQueryHandlerTests`
+  - `Handle_ShouldReturnOrdersList`
+
+- `GetOrderByIdQueryHandlerTests`
+  - `Handle_ValidId_ShouldReturnOrder`
+
+### **Entegrasyon Testleri**
+
+- `OrderServiceIntegrationTests`
+  - Sipariş oluştururken ProductService'den stok doğrulamasını test eder.
+
+### **OrderService Testlerinin Çalıştırılması**
+
+Tüm OrderService testlerini çalıştırmak için:
+```bash
+cd MicroServiceProject.OrderService.Tests
+dotnet test
+```
+
+Belirli bir test sınıfını çalıştırmak için:
+```bash
+dotnet test --filter FullyQualifiedName~MicroServiceProject.OrderService.Tests.Commands.CreateOrderCommandHandlerTests
+```
+
+---
+
+## **Testler için Genel İpuçları**
+
+1. Gerekli tüm test bağımlılıklarının yüklü olduğundan emin olun:
+   ```bash
+   dotnet restore
+   ```
+
+2. Test sonuçlarını kaydetmek için `--logger` parametresini kullanın:
+   ```bash
+   dotnet test --logger "trx;LogFileName=TestResults.trx"
+   ```
+
+3. Entegrasyon testleri için, üretim verilerini değiştirmemek adına **In-Memory Database** kullanmayı tercih edin.
+
+---
+
 ## **Sonuç**
 
 Bu proje, bir e-ticaret platformu için modern bir microservice mimarisi sağlar. Her microservice bağımsız olarak geliştirilmiş ve çalıştırılabilir. API Gateway, tüm servisleri tek bir noktadan yönetirken, kimlik doğrulama **AuthAPI** ile sağlanmaktadır. Frontend tarafında React ile kullanıcı dostu bir arayüz sunulmuştur.
